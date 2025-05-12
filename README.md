@@ -1,4 +1,4 @@
-# Tic Tac Toe – Python Project
+# Tic Tac Toe – Python Project 
 
 A Python-based implementation of the classic Tic Tac Toe game, featuring both a **Graphical User Interface (GUI)** and an optional **computer opponent** powered by simple artificial intelligence (AI).
 
@@ -10,8 +10,8 @@ This project is designed to deepen practical skills in Python, Git, GitHub Copil
 
 The goal of this project is to build a **fully functional Tic Tac Toe game** with two playable modes:
 
+- **Player vs Computer (PvC)** – A human player competes against an AI opponent. 
 - **Player vs Player (PvP)** – Two human players take turns.
-- **Player vs Computer (PvC)** – A human player competes against an AI opponent.
 
 The project will evolve in stages:
 1. **Console version** — Text-based gameplay to establish core logic.
@@ -26,9 +26,9 @@ The project will evolve in stages:
 - [x] Player move input with validation
 - [x] Automatic turn switching
 - [x] Win and draw detection
-- [x] Game restart option
+- [ ] Game restart option
 - [ ] Graphical User Interface (Tkinter)
-- [ ] Player vs Computer mode (AI opponent)
+- [x] Player vs Computer mode (AI opponent)
 - [ ] AI opponent with Minimax algorithm or random strategy
 - [ ] Visual win highlighting
 - [ ] Score tracking (optional)
@@ -56,17 +56,17 @@ tic_tac_toe/
 ├── .gitignore
 ├── README.md
 ├── requirements.txt       # (Optional) dependencies list
-├── main.py                # Entry point
-├── game/
+├── src/
 │   ├── __init__.py
-│   ├── board.py           # Board class & rendering logic
-│   ├── player.py          # Player management
-│   ├── game_logic.py      # Win/draw checking, move validation
 │   ├── ai.py              # AI opponent logic (PvC mode)
+│   ├── board.py           # Board class & rendering logic
+│   ├── game.py            # Win/draw checking, move validation
+│   ├── main.py            # Entry point
+│   ├── player.py          # Player management
 │   └── gui.py             # Tkinter GUI interface
 ├── tests/
 │   ├── __init__.py
 │   ├── test_board.py
-│   ├── test_game_logic.py
+│   ├── test_game.py
 │   └── test_ai.py
 └── assets/                # (Optional) images, icons, etc.
