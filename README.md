@@ -27,7 +27,7 @@ The project will evolve in stages:
 - [x] Automatic turn switching
 - [x] Win and draw detection
 - [x] Game restart option
-- [ ] Graphical User Interface (Tkinter)
+- [x] Graphical User Interface (Tkinter)
 - [x] Player vs Computer mode (AI opponent)
 - [ ] AI opponent with Minimax algorithm or random strategy
 - [ ] Visual win highlighting
