@@ -29,8 +29,9 @@ The project will evolve in stages:
 - [x] Game restart option
 - [x] Graphical User Interface (Tkinter)
 - [x] Player vs Computer mode (AI opponent)
-- [ ] AI opponent with Minimax algorithm or random strategy
-- [ ] Visual win highlighting
+- [X] AI opponent with rule based (heuristic) AI - decisions using simple logic
+- [ ] AI opponent with Minimax algorithm
+- [x] Visual win highlighting
 - [ ] Score tracking (optional)
 
 ---
@@ -60,10 +61,10 @@ tic_tac_toe/
 │   ├── __init__.py
 │   ├── ai.py              # AI opponent logic (PvC mode)
 │   ├── board.py           # Board class & rendering logic
-│   ├── game.py            # Win/draw checking, move validation
+│   ├── game.py            # Initial terminal based Game engine - replaced by gui.py
 │   ├── main.py            # Entry point
 │   ├── player.py          # Player management
-│   └── gui.py             # Tkinter GUI interface
+│   └── gui.py             # Tkinter GUI interface with game engine
 ├── tests/
 │   ├── __init__.py
 │   ├── test_board.py
