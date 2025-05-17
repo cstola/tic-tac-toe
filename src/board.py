@@ -19,6 +19,10 @@ class Board:
         self.grid[(cell-1)//3][(cell-1)%3] = marker
         return True if self.grid[(cell-1)//3][(cell-1)%3] == marker else False
 
+    def available_moves(self) -> list:
+        """Return a list of available moves"""
+        return [int(self.grid[i][j]) for i in range(3) for j in range(3) if self.grid[i][j] not in ['X', 'O']]  
+    
     def is_full(self) -> bool:
         """Return True if board is full"""
         for row in self.grid:
@@ -26,6 +30,10 @@ class Board:
                 if cell not in ['X', 'O']:
                     return False
         return True
+    
+    def is_empty(self, cell: int) -> bool:
+        """Return True if cell is empty"""
+        return self.grid[(cell-1)//3][(cell-1)%3] not in ['X', 'O']
 
     def check_winner(self, marker: str, return_combo: bool = False):
         """Return True if marker wins. If return_combo is True, also return the winning combination as a list of (row, col)."""

@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from board import Board
 from player import Player
-from ai import AIPlayer
+from ai import AIPlayerSmarter
 
 class TicTacToeGUI:
     def __init__(self):
@@ -12,7 +12,7 @@ class TicTacToeGUI:
 
         self.board = Board()
         self.player1 = Player("Player 1", "X")
-        self.player2 = AIPlayer("Computer", "O")
+        self.player2 = AIPlayerSmarter("Computer", "O")
         self.current_player = self.player1
 
         self.buttons = []
@@ -45,7 +45,7 @@ class TicTacToeGUI:
                 return
 
             # AI move
-            if isinstance(self.player2, AIPlayer):
+            if isinstance(self.player2, AIPlayerSmarter):
                 ai_move = self.player2.get_move(self.board)
                 if ai_move != -1:
                     ai_row = (ai_move - 1) // 3
