@@ -55,7 +55,15 @@ class TicTacToeGUI:
                     self.check_game_end()
 
     def check_game_end(self):
-        if self.board.check_winner(self.current_player.marker):
+        win_result = self.board.check_winner(self.current_player.marker, return_combo=True)
+        if isinstance(win_result, tuple):
+            has_won, win_combo = win_result
+        else:
+            has_won, win_combo = win_result, None
+        if has_won:
+            if win_combo:
+                for row, col in win_combo:
+                    self.buttons[row][col].config(fg='green')
             messagebox.showinfo("Game Over", f"{self.current_player.name} wins!")
             self.reset_game()
             return True
@@ -71,7 +79,7 @@ class TicTacToeGUI:
         self.current_player = self.player1
         for row in self.buttons:
             for button in row:
-                button.config(text="")
+                button.config(text="", fg="black")
 
     def run(self):
         self.window.mainloop()

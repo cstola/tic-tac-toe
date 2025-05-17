@@ -27,17 +27,29 @@ class Board:
                     return False
         return True
 
-    def check_winner(self, marker: str) -> bool:
-        """Return True if marker wins"""
+    def check_winner(self, marker: str, return_combo: bool = False):
+        """Return True if marker wins. If return_combo is True, also return the winning combination as a list of (row, col)."""
         # Check rows
-        for row in self.grid:
+        for i, row in enumerate(self.grid):
             if all(cell == marker for cell in row):
+                if return_combo:
+                    return True, [(i, j) for j in range(3)]
                 return True
         # Check columns
-        for col in range(3):
-            if all(self.grid[row][col] == marker for row in range(3)):
+        for j in range(3):
+            if all(self.grid[i][j] == marker for i in range(3)):
+                if return_combo:
+                    return True, [(i, j) for i in range(3)]
                 return True
         # Check diagonals
-        if all(self.grid[i][i] == marker for i in range(3)) or all(self.grid[i][2-i] == marker for i in range(3)):
+        if all(self.grid[i][i] == marker for i in range(3)):
+            if return_combo:
+                return True, [(i, i) for i in range(3)]
             return True
+        if all(self.grid[i][2-i] == marker for i in range(3)):
+            if return_combo:
+                return True, [(i, 2-i) for i in range(3)]
+            return True
+        if return_combo:
+            return False, None
         return False
