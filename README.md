@@ -32,7 +32,7 @@ The project will evolve in stages:
 - [X] AI opponent with rule based (heuristic) AI - decisions using simple logic
 - [ ] AI opponent with Minimax algorithm
 - [x] Visual win highlighting
-- [ ] Score tracking (optional)
+- [x] Score tracking (optional)
 
 ---
 

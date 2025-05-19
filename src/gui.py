@@ -10,6 +10,17 @@ class TicTacToeGUI:
         self.window.title("Tic Tac Toe")
         self.window.resizable(False, False)
 
+        # Score tracking
+        self.scores = {"Player 1": 0, "Computer": 0, "Draws": 0}
+
+        # Header
+        self.header_label = tk.Label(self.window, text="Tic-Tac-Toe game", font=("Arial", 20, "bold"), pady=10)
+        self.header_label.pack()
+
+        # Board frame
+        self.board_frame = tk.Frame(self.window)
+        self.board_frame.pack(pady=10)
+
         self.board = Board()
         self.player1 = Player("Player 1", "X")
         self.player2 = AIPlayerSmarter("Computer", "O")
@@ -17,13 +28,23 @@ class TicTacToeGUI:
 
         self.buttons = []
         self.create_board_gui()
-        
+
+        # Score label at the bottom (horizontal dashboard style)
+        self.score_frame = tk.Frame(self.window)
+        self.score_frame.pack(pady=10)
+        self.score_p1 = tk.Label(self.score_frame, text=f"Player 1: {self.scores['Player 1']}", font=("Arial", 12), padx=20)
+        self.score_p1.pack(side=tk.LEFT)
+        self.score_comp = tk.Label(self.score_frame, text=f"Computer: {self.scores['Computer']}", font=("Arial", 12), padx=20)
+        self.score_comp.pack(side=tk.LEFT)
+        self.score_draws = tk.Label(self.score_frame, text=f"Draws: {self.scores['Draws']}", font=("Arial", 12), padx=20)
+        self.score_draws.pack(side=tk.LEFT)
+
     def create_board_gui(self):
         for i in range(3):
             row = []
             for j in range(3):
                 button = tk.Button(
-                    self.window,
+                    self.board_frame,
                     text="",
                     font=('Arial', 20),
                     width=5,
@@ -33,6 +54,11 @@ class TicTacToeGUI:
                 button.grid(row=i, column=j, padx=5, pady=5)
                 row.append(button)
             self.buttons.append(row)
+
+    def update_score_labels(self):
+        self.score_p1.config(text=f"Player 1: {self.scores['Player 1']}")
+        self.score_comp.config(text=f"Computer: {self.scores['Computer']}")
+        self.score_draws.config(text=f"Draws: {self.scores['Draws']}")
 
     def handle_click(self, row, col):
         if self.board.grid[row][col] not in ['X', 'O']:
@@ -64,10 +90,16 @@ class TicTacToeGUI:
             if win_combo:
                 for row, col in win_combo:
                     self.buttons[row][col].config(fg='green')
+            winner_name = self.current_player.name
+            if winner_name in self.scores:
+                self.scores[winner_name] += 1
+            self.update_score_labels()
             messagebox.showinfo("Game Over", f"{self.current_player.name} wins!")
             self.reset_game()
             return True
         elif self.board.is_full():
+            self.scores["Draws"] += 1
+            self.update_score_labels()
             messagebox.showinfo("Game Over", "It's a draw!")
             self.reset_game()
             return True
