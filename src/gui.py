@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from board import Board
 from player import Player
-from ai import AIPlayerSmarter
+from ai import AIPlayerMinimax # AIPlayerMinimax replaced AIPlayerSmarter with Minimax for better AI performance
 
 class TicTacToeGUI:
     def __init__(self):
@@ -23,7 +23,7 @@ class TicTacToeGUI:
 
         self.board = Board()
         self.player1 = Player("Player 1", "X")
-        self.player2 = AIPlayerSmarter("Computer", "O")
+        self.player2 = AIPlayerMinimax("Computer", "O") # AIPlayerSmarter replaced by Minimax
         self.current_player = self.player1
 
         self.buttons = []
@@ -71,7 +71,7 @@ class TicTacToeGUI:
                 return
 
             # AI move
-            if isinstance(self.player2, AIPlayerSmarter):
+            if isinstance(self.player2, AIPlayerMinimax): # AIPlayerSmarter replaced by Minimax                ai_move = self.player2.get_move(self.board)
                 ai_move = self.player2.get_move(self.board)
                 if ai_move != -1:
                     ai_row = (ai_move - 1) // 3

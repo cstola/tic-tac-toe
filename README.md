@@ -1,6 +1,6 @@
 # Tic Tac Toe – Python Project 
 
-A Python-based implementation of the classic Tic Tac Toe game, featuring both a **Graphical User Interface (GUI)** and an optional **computer opponent** powered by simple artificial intelligence (AI).
+A Python-based implementation of the classic Tic Tac Toe game, featuring both a **Graphical User Interface (GUI)** and a **computer opponent** powered by simple artificial intelligence (AI).
 
 This project is designed to deepen practical skills in Python, Git, GitHub Copilot, and application development workflows — moving from a basic console game to a feature-rich application.
 
@@ -8,10 +8,7 @@ This project is designed to deepen practical skills in Python, Git, GitHub Copil
 
 ## 📋 Project Overview
 
-The goal of this project is to build a **fully functional Tic Tac Toe game** with two playable modes:
-
-- **Player vs Computer (PvC)** – A human player competes against an AI opponent. 
-- **Player vs Player (PvP)** – Two human players take turns.
+The goal of this project is to build a **fully functional Tic Tac Toe game** where a human player competes against an AI opponent. 
 
 The project will evolve in stages:
 1. **Console version** — Text-based gameplay to establish core logic.
@@ -30,9 +27,9 @@ The project will evolve in stages:
 - [x] Graphical User Interface (Tkinter)
 - [x] Player vs Computer mode (AI opponent)
 - [X] AI opponent with rule based (heuristic) AI - decisions using simple logic
-- [ ] AI opponent with Minimax algorithm
+- [X] AI opponent with Minimax algorithm
 - [x] Visual win highlighting
-- [x] Score tracking (optional)
+- [x] Score tracking
 
 ---
 
@@ -65,9 +62,3 @@ tic_tac_toe/
 │   ├── main.py            # Entry point
 │   ├── player.py          # Player management
 │   └── gui.py             # Tkinter GUI interface with game engine
-├── tests/
-│   ├── __init__.py
-│   ├── test_board.py
-│   ├── test_game.py
-│   └── test_ai.py
-└── assets/                # (Optional) images, icons, etc.

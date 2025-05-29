@@ -36,4 +36,43 @@ class AIPlayerSmarter(Player):
                 return move
         
         return random.choice(board.available_moves())  # Fallback to random move
-        
+
+class AIPlayerMinimax(Player):
+    def get_move(self, board: 'Board') -> int:
+        """Return the best move for the AI using the Minimax algorithm."""
+        best_score = float('-inf')
+        best_move = -1
+        for move in board.available_moves():
+            board.update_cell(move, self.marker)
+            score = self.minimax(board, False)
+            board.update_cell(move, str(move))  # Undo move
+            if score > best_score:
+                best_score = score
+                best_move = move
+        return best_move
+
+    def minimax(self, board: 'Board', is_maximizing: bool) -> int:
+        opponent_marker = 'X' if self.marker == 'O' else 'O'
+        if board.check_winner(self.marker):
+            return 1
+        elif board.check_winner(opponent_marker):
+            return -1
+        elif board.is_full():
+            return 0
+
+        if is_maximizing:
+            best_score = float('-inf')
+            for move in board.available_moves():
+                board.update_cell(move, self.marker)
+                score = self.minimax(board, False)
+                board.update_cell(move, str(move))
+                best_score = max(score, best_score)
+            return int(best_score)
+        else:
+            best_score = float('inf')
+            for move in board.available_moves():
+                board.update_cell(move, opponent_marker)
+                score = self.minimax(board, True)
+                board.update_cell(move, str(move))
+                best_score = min(score, best_score)
+            return int(best_score)     
