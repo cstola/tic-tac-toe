@@ -13,13 +13,18 @@ class TicTacToeGUI:
         # Score tracking
         self.scores = {"Player 1": 0, "Computer": 0, "Draws": 0}
 
-        # Header
-        self.header_label = tk.Label(self.window, text="Tic-Tac-Toe game", font=("Arial", 20, "bold"), pady=10)
-        self.header_label.pack()
+        # Header with extra vertical padding
+        self.header_label = tk.Label(self.window, text="Tic-Tac-Toe game", font=("Arial", 20, "bold"), pady=20)
+        self.header_label.pack(pady=(20, 10))
 
         # Board frame
         self.board_frame = tk.Frame(self.window)
         self.board_frame.pack(pady=10)
+
+        # Load all images
+        self.empty_img = tk.PhotoImage(file="../assets/OF1.png")
+        self.player_img = tk.PhotoImage(file="../assets/O0.png")
+        self.ai_img = tk.PhotoImage(file="../assets/PX.png")
 
         self.board = Board()
         self.player1 = Player("Player 1", "X")
@@ -29,7 +34,7 @@ class TicTacToeGUI:
         self.buttons = []
         self.create_board_gui()
 
-        # Score label at the bottom (horizontal dashboard style)
+        # Score label at the bottom with extra vertical padding
         self.score_frame = tk.Frame(self.window)
         self.score_frame.pack(pady=10)
         self.score_p1 = tk.Label(self.score_frame, text=f"Player 1: {self.scores['Player 1']}", font=("Arial", 12), padx=20)
@@ -47,8 +52,10 @@ class TicTacToeGUI:
                     self.board_frame,
                     text="",
                     font=('Arial', 20),
-                    width=5,
-                    height=2,
+                    width=70,  # Adjusted for image size
+                    height=70, # Adjusted for image size
+                    image=self.empty_img,
+                    compound=tk.CENTER,
                     command=lambda row=i, col=j: self.handle_click(row, col)
                 )
                 button.grid(row=i, column=j, padx=5, pady=5)
@@ -62,10 +69,10 @@ class TicTacToeGUI:
 
     def handle_click(self, row, col):
         if self.board.grid[row][col] not in ['X', 'O']:
-            # Update board and GUI
+            # Update board and GUI for player's move
             cell_num = row * 3 + col + 1
             self.board.update_cell(cell_num, self.current_player.marker)
-            self.buttons[row][col].config(text=self.current_player.marker)
+            self.buttons[row][col].config(text="", image=self.player_img)
 
             if self.check_game_end():
                 return
@@ -77,7 +84,7 @@ class TicTacToeGUI:
                     ai_row = (ai_move - 1) // 3
                     ai_col = (ai_move - 1) % 3
                     self.board.update_cell(ai_move, self.player2.marker)
-                    self.buttons[ai_row][ai_col].config(text=self.player2.marker)
+                    self.buttons[ai_row][ai_col].config(text="", image=self.ai_img)
                     self.check_game_end()
 
     def check_game_end(self):
@@ -109,9 +116,9 @@ class TicTacToeGUI:
     def reset_game(self):
         self.board = Board()
         self.current_player = self.player1
-        for row in self.buttons:
-            for button in row:
-                button.config(text="", fg="black")
+        for i, row in enumerate(self.buttons):
+            for j, button in enumerate(row):
+                button.config(text="", fg="black", image=self.empty_img)
 
     def run(self):
         self.window.mainloop()
